@@ -23,9 +23,9 @@ def adminFeatures(option):
     elif option==3:
         admin.accList
     elif option==4:
-        admin.totalBalance
+        print(f"Total avialablebalance: {admin.availableBalance}")
     elif option==5:
-        admin.totalLoanAmount
+        print(f"Total loan amount: {admin.totalLoanAmount}")
     elif option==6:
         admin.checkLoanStatus
         x=input("Loan feature (ON/OFF):")
@@ -47,17 +47,27 @@ def userFeatures(accNo,option):
         admin.deposit(amount)
     elif option==3:
         amount=int(input("Enter withdraw amount:"))
-        if admin.totalBalance<user.availableBalance or admin.totalBalance<amount:
+        if admin.availableBalance<user.availableBalance or admin.availableBalance<amount:
             print("the bank is bankrupt")
         else:
             user.withdrawl(amount)
             admin.withdraw(amount)
     elif option==4:
-        user.availableBalance
+        print(f"Available balance: {user.availableBalance}")
     elif option==5:
         user.transactions
     elif option==6:
         pass
+        # accNo1=int(input("Enter transfer money account no:"))
+        # if admin.checkAcNo(accNo1)==True:
+        #     print(f"A/C: {accNo1} Found.")
+        #     user2=admin.returnUser(accNo1)
+        #     amount=int(input("Enter transfer amount:"))
+        #     if amount>user.availableBalance:
+        #         print("You have not enough balance.")
+        #     else:
+        #         user.withdrawl(amount)
+        #         user2.deposit(amount)
         
 
 while True:
@@ -97,7 +107,9 @@ while True:
                   if flag==True:
                       print("Log out successful.")
                       break
-                  if admin.checkAcNo(accNo)==True:
+                  if admin.checkAcNo(accNo)==False:
+                      print("Account not found")
+                  else:
                       print("Account identified")
                       name=input("Enter your name:")
                       email=input("Enter your email:")
@@ -119,47 +131,6 @@ while True:
                    break
               else:
                   print("Invalid input.")
-        """
-        agree=input("Do you have any account (Yes/No)?")
-        if agree.lower()=="no":
-            doYouWantCreateAc=input("Do you want to create account (Yes/No)?")
-            if doYouWantCreateAc.lower()=="no":
-                continue
-            else:
-                name=input("Enter your name:")
-                email=input("Enter your email:")
-                address=input("Enter your address:")
-                acType=input("Enter account type (Savings / Current):")
-                if acType.lower()=="savings" or acType.lower()=="current":
-                    # Account(name,email,address,acType)
-                    admin.createAcc(name,email,address,acType)
-                else:
-                    print("You have selected wrong account type. Please write correct type.")
-                    continue
-        while True:
-            accNo=input("0 for exit, Otherwise enter account number:")
-            logOut=False
-            if logOut==True:
-                print("Log Out Successful. Thanks for visiting.")
-                break
-            elif accNo=='0':
-                break
-            elif admin.checkAcNo(int(accNo))==True:
-               print(f"Account verification successful.")
-               name=input("Enter name:")
-               email=input("Enter email:")
-               acType=input("Account Type:")
-               if admin.checkAcInfo(int(accNo),name)==True:
-                   while True:
-                       print("3 for deposit money.\n4 for check available balance.\n5 transactions history.\n6 get loan from"+
-                             "the bank\n7 transfer money from your account to another account.\n0 for exit.")
-                       option=input("Option:")
-                       if option=="0":
-                           print("Thanks for visiting")
-                           logOut=True
-                           break
-            else:
-                print("You have enter wrong credential.")"""
 
     elif userType.lower()=='e':
         print("Thanks for visiting")

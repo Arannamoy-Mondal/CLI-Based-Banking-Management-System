@@ -31,7 +31,8 @@ class Account:
     
     @property
     def availableBalance(self):
-        print(f"Available balance: {self.__balance}")
+        return self.__balance
+        # print(f"Available balance: {self.__balance}")
     
     @property
     def transactions(self):

@@ -46,8 +46,9 @@ class Bank:
         else:
             print(f"Loan Status of Bank: OFF")
     @property
-    def totalBalance(self):
-        print(f"Total Balance: {self.__totalBalance}")
+    def availableBalance(self):
+        return self.__totalBalance
+        # print(f"Total Balance: {self.__totalBalance}")
     @property
     def totalLoanAmount(self):
         print(f"Total loan amount: {self.__totalLoanAmount}")
