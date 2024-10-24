@@ -22,6 +22,20 @@ class Bank:
         self.__totalLoanAmount+=x
     def loanStatus(self,x):
         self.__loanFeature=x  
+
+    def checkAcNo(self,x):
+        if x in self.__AccountList:
+            return True
+        else :
+            return False
+    def checkAcInfo(self,acNo,name):
+        if acNo in self.__AccountList:
+            if self.__AccountList[acNo].name==name:
+                print(f"Welcome, Mr. {name} !")
+                return True
+            else:
+                print("You have entered wrong credential.")
+                return False
     @property 
     def checkLoanStatus(self):
         if self.__loanFeature==True:
