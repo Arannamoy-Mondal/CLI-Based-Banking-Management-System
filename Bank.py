@@ -20,9 +20,12 @@ class Bank:
         self.__totalBalance-=x
     def takeLoan(self,x):
         self.__totalLoanAmount+=x
+        self.__totalBalance-=x
     def loanStatus(self,x):
         self.__loanFeature=x  
-
+    def returnUser(self,accNo):
+        if accNo in self.__AccountList:
+            return self.__AccountList[accNo]
     def checkAcNo(self,x):
         if x in self.__AccountList:
             return True

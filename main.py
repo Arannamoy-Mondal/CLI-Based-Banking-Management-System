@@ -39,9 +39,26 @@ def adminFeatures(option):
             print("Invalid option for loan status")
 
 
-def userFeatures(option):
-    if option==1:
+def userFeatures(accNo,option):
+    user=admin.returnUser(accNo)
+    if option==2:
+        amount=int(input("Enter deposit amount:"))
+        user.deposit(amount)
+        admin.deposit(amount)
+    elif option==3:
+        amount=int(input("Enter withdraw amount:"))
+        if admin.totalBalance<user.availableBalance or admin.totalBalance<amount:
+            print("the bank is bankrupt")
+        else:
+            user.withdrawl(amount)
+            admin.withdraw(amount)
+    elif option==4:
+        user.availableBalance
+    elif option==5:
+        user.transactions
+    elif option==6:
         pass
+        
 
 while True:
     userType=input("U for User, A for Admin, E for exit:")
@@ -58,7 +75,7 @@ while True:
                 print("Invalid input")
     elif userType.lower()=='u':
         while True:
-              print("Welcome to our bank.\n 1 for create account.\n2 for log in account.\e for log out.")
+              print("Welcome to our bank.\n1 for create account.\n2 for log in account.\n0 for exit.")
               option=input("Option:")
               if option=="1":
                   name=input("Enter your name:")
@@ -70,13 +87,35 @@ while True:
                           acType="Savings"
                       else:
                           acType="Current"
-                      print(name+email+address+acType)
+                    #   print(name+email+address+acType)
                       admin.createAcc(name,email,address,acType)
                   else:
                       print("Incorrect account type.")
               elif option=="2":
-                  pass
-              elif option=="e":
+                  accNo=int(input("Enter account no:"))
+                  flag=False
+                  if flag==True:
+                      print("Log out successful.")
+                      break
+                  if admin.checkAcNo(accNo)==True:
+                      print("Account identified")
+                      name=input("Enter your name:")
+                      email=input("Enter your email:")
+                      if admin.checkAcInfo(accNo,name):
+                          while True:
+                               print("2 for deposit money.\n3 for withdrawl amount\n4 for check available balance.\n5 transactions history.\n6 get loan from"+
+                             "the bank\n7 transfer money from your account to another account.\n0 for exit.")
+                               userOption=input("Option:")
+                               if userOption=="0":
+                                   flag=True
+                                   break
+                               elif userOption=="2" or userOption=="3" or userOption=="4" or userOption=="5" or userOption=="6" or userOption=="7":
+                                   userFeatures(accNo,int(userOption))
+                               else:
+                                   print("Invalid input")
+                      else:
+                          print("You have enter wrong credential.")
+              elif option=="0":
                    break
               else:
                   print("Invalid input.")
