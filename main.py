@@ -17,7 +17,9 @@ def adminFeatures(option):
             else:
                 return
     elif option==2:
-        pass
+        admin.accList
+        x=int(input("Enter account no:"))
+        admin.deleteAc(x)
     elif option==3:
         admin.accList
     elif option==4:

@@ -8,6 +8,12 @@ class Bank:
     def createAcc(self,name,email,address,acType):
         account=Account(name,email,address,acType)
         self.__AccountList[account.acNumber]=account
+    def deleteAc(self,accNo):
+        if accNo in self.__AccountList:
+           del self.__AccountList[accNo]
+           print(f"{accNo} delete successfully.")
+        else:
+            print(f"Account {accNo} not found.")
     def deposit(self,x):
         self.__totalBalance+=x
     def withdraw(self,x):
