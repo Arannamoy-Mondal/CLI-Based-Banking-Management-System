@@ -39,7 +39,7 @@ def adminFeatures(option):
             print("Invalid option for loan status")
 
 
-def user(option):
+def userFeatures(option):
     if option==1:
         pass
 
@@ -57,7 +57,30 @@ while True:
             else:
                 print("Invalid input")
     elif userType.lower()=='u':
-        print("Welcome to our bank")
+        while True:
+              print("Welcome to our bank.\n 1 for create account.\n2 for log in account.\e for log out.")
+              option=input("Option:")
+              if option=="1":
+                  name=input("Enter your name:")
+                  email=input("Enter your email:")
+                  address=input("Enter your address:")
+                  acType=input("Enter account type (Savings/Current):")
+                  if acType.lower()=="savings" or acType.lower()=="current":
+                      if acType.lower()=="savings":
+                          acType="Savings"
+                      else:
+                          acType="Current"
+                      print(name+email+address+acType)
+                      admin.createAcc(name,email,address,acType)
+                  else:
+                      print("Incorrect account type.")
+              elif option=="2":
+                  pass
+              elif option=="e":
+                   break
+              else:
+                  print("Invalid input.")
+        """
         agree=input("Do you have any account (Yes/No)?")
         if agree.lower()=="no":
             doYouWantCreateAc=input("Do you want to create account (Yes/No)?")
@@ -72,11 +95,15 @@ while True:
                     # Account(name,email,address,acType)
                     admin.createAcc(name,email,address,acType)
                 else:
-                    acType=input("You have selected wrong account type. Please write correct type.")
+                    print("You have selected wrong account type. Please write correct type.")
                     continue
         while True:
             accNo=input("0 for exit, Otherwise enter account number:")
-            if accNo=='0':
+            logOut=False
+            if logOut==True:
+                print("Log Out Successful. Thanks for visiting.")
+                break
+            elif accNo=='0':
                 break
             elif admin.checkAcNo(int(accNo))==True:
                print(f"Account verification successful.")
@@ -90,9 +117,10 @@ while True:
                        option=input("Option:")
                        if option=="0":
                            print("Thanks for visiting")
-                           continue
+                           logOut=True
+                           break
             else:
-                print("You have enter wrong credential.")
+                print("You have enter wrong credential.")"""
 
     elif userType.lower()=='e':
         print("Thanks for visiting")

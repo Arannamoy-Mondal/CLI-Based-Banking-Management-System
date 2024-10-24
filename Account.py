@@ -10,7 +10,7 @@ class Account:
         self.transactionsHistory=[]
         self.loanTime=0
         self.loanAmount=0
-        print(f"Mr. {self.name} account no is {self.acNumber}. Please remember it or note down it.")
+        print(f"Congratulations! Account created successfully.\n Mr. {self.name} account no is {self.acNumber}. Please remember it or note down it.")
     def deposit(self,balance):
         self.__balance+=balance
         self.transactionsHistory.append(f"Deposit ==> {balance}")
