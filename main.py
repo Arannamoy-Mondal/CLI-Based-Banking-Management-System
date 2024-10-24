@@ -58,7 +58,7 @@ def userFeatures(accNo,option):
             print("This bank is bankrupt")
             return
         amount=int(input("Enter withdraw amount:"))
-        if user.availableBalance>amount:
+        if user.availableBalance<amount:
             print("Withdrawal amount exceeded")
         elif admin.availableBalance<user.availableBalance or admin.availableBalance<amount:
             print("This bank is bankrupt")
@@ -92,7 +92,7 @@ def userFeatures(accNo,option):
                 user2.deposit(amount)
                 print("Transfer successful.")
         else:
-            print("Invalid data")
+            print("Account does not exist")
         
 
 while True:
