@@ -37,6 +37,14 @@ def adminFeatures(option):
             admin.checkLoanStatus
         else:
             print("Invalid option for loan status")
+    elif option==7:
+        x=input("Is the bank bankrupt(Yes/No)?")
+        if x.lower()=="yes":
+            admin.changeBankRuptcy("True")
+        elif x.lower()=="no":
+            admin.changeBankRuptcy("False")
+        else:
+            print("Invalid input")
 
 
 def userFeatures(accNo,option):
@@ -46,28 +54,45 @@ def userFeatures(accNo,option):
         user.deposit(amount)
         admin.deposit(amount)
     elif option==3:
+        if admin.checkBankRuptcy()==True:
+            print("This bank is bankrupt")
+            return
         amount=int(input("Enter withdraw amount:"))
-        if admin.availableBalance<user.availableBalance or admin.availableBalance<amount:
-            print("the bank is bankrupt")
+        if user.availableBalance>amount:
+            print("Withdrawal amount exceeded")
+        elif admin.availableBalance<user.availableBalance or admin.availableBalance<amount:
+            print("This bank is bankrupt")
         else:
             user.withdrawl(amount)
             admin.withdraw(amount)
+            print(f"Withdrawal Successful.")
     elif option==4:
         print(f"Available balance: {user.availableBalance}")
     elif option==5:
         user.transactions
     elif option==6:
-        pass
-        # accNo1=int(input("Enter transfer money account no:"))
-        # if admin.checkAcNo(accNo1)==True:
-        #     print(f"A/C: {accNo1} Found.")
-        #     user2=admin.returnUser(accNo1)
-        #     amount=int(input("Enter transfer amount:"))
-        #     if amount>user.availableBalance:
-        #         print("You have not enough balance.")
-        #     else:
-        #         user.withdrawl(amount)
-        #         user2.deposit(amount)
+        if admin.checkBankRuptcy():
+            print("This bank is bankrupt")
+            return
+        else:
+            print(f"You got loan {admin.checkBankRuptcy()}")
+    elif option==7:
+        if admin.checkBankRuptcy()==True:
+            print("This bank is bankrupt")
+            return
+        accNo1=int(input("Enter transfer money account no:"))
+        if admin.checkAcNo(accNo1)==True and accNo!=accNo1:
+            print(f"A/C: {accNo1} Found.")
+            user2=admin.returnUser(accNo1)
+            amount=int(input("Enter transfer amount:"))
+            if amount>user.availableBalance:
+                print("You have not enough balance.")
+            else:
+                user.withdrawl(amount)
+                user2.deposit(amount)
+                print("Transfer successful.")
+        else:
+            print("Invalid data")
         
 
 while True:
@@ -75,11 +100,12 @@ while True:
     if userType.lower()=='a':
         while True:
             print("0 for exit.\n1 for creat an account.\n2 for delete user account.\n3 see all user accounts list.\n4 "+
-              "total available balance of the bank.\n5 total loan amount.\n6 for on or off the loan feature of the bank.")
+              "total available balance of the bank.\n5 total loan amount.\n6 for on or off the loan feature of the bank.\n"
+              +"7 for the bankruptcy")
             option=input("Option:")
             if option=="0":
                 break
-            elif option == "1" or option == "2" or option == "3" or option == "4" or option == "5" or option == "6":
+            elif option == "1" or option == "2" or option == "3" or option == "4" or option == "5" or option == "6" or option=="7":
                adminFeatures(int(option))
             else:
                 print("Invalid input")

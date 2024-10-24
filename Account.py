@@ -20,7 +20,6 @@ class Account:
         else:
             self.__balance-=balance
             self.transactionsHistory.append(f"Withdraw ==> {balance}")
-            print(f"Withdrawal Successful.")
 
     def takeLoan(self,amount):
         if self.loanTime<2:

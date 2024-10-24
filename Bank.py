@@ -5,6 +5,7 @@ class Bank:
         self.__totalBalance=0
         self.__totalLoanAmount=0
         self.__loanFeature=True
+        self.__bankRuptcy=False
     def createAcc(self,name,email,address,acType):
         account=Account(name,email,address,acType)
         self.__AccountList[account.acNumber]=account
@@ -39,6 +40,13 @@ class Bank:
             else:
                 print("You have entered wrong credential.")
                 return False
+    def changeBankRuptcy(self,x):
+        self.__bankRuptcy=x
+    def checkBankRuptcy(self):
+        if self.__bankRuptcy=="True":
+            return True
+        else:
+            return False
     @property 
     def checkLoanStatus(self):
         if self.__loanFeature==True:
