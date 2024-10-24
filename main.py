@@ -1,9 +1,11 @@
-class User:
+import random
+class Account:
     def __init__(self,name,email,address,acType):
         self.name=name
         self.email=email
         self.address=address
         self.acType=acType
+        self.acNumber=random.randint(400,999)
         self.__balance=0
         self.transactionsHistory=[]
         self.loanTime=0
@@ -36,15 +38,35 @@ class User:
             print(f"{i}")
 
 
+class Admin:
+    def __init__(self):
+        self.AccountList={}
+        self.__totalBalance=0
+        self.__totalLoanAmount=0
+        self.__loanFeature=True
+    def createAcc(self,name,email,address,acType):
+        account=Account(name,email,address,acType)
+        self.AccountList[account.acNumber]=account
+    def deposit(self,x):
+        self.__totalBalance+=x
+    def withdraw(self,x):
+        self.__totalBalance-=x
+    def takeLoan(self,x):
+        self.__totalLoanAmount+=x
+    def loanStatus(self,x):
+        self.__loanFeature=x    
+    @property
+    def totalBalance(self):
+        print(f"Total Balance: {self.__totalBalance}")
+    def accList(self):
+        for key,value in self.AccountList.items():
+            print(f"{value.name} {value.email} {value.address} {value.acType} {key}")
 
-
-ac1=User("User1","XYZ","XYZ","Savings")
-ac1.availableBalance
-ac1.deposit(1000)
-ac1.withdrawl(500)
-ac1.deposit(10000)
-ac1.withdrawl(500)
-ac1.transactions
-ac1.availableBalance
-ac1.takeLoan(500)
-ac1.takeLoan(1000)
+admin=Admin()
+admin.createAcc('XYZ','XYZ','XYZ','Savings')
+admin.createAcc('XYZ','XYZ','XYZ','Savings')
+admin.createAcc('XYZ','XYZ','XYZ','Current')
+admin.createAcc('XYZ','XYZ','XYZ','Savings')
+admin.createAcc('XYZ','XYZ','XYZ','Savings')
+admin.createAcc('XYZ','XYZ','XYZ','Savings')
+admin.accList()
