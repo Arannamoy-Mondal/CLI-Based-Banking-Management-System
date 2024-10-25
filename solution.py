@@ -104,7 +104,8 @@ class Bank:
     @property
     def firstBankRuptcy(self):
         if self.__totalBalance<self.__totalLoanAmount:
-                self.__bankRuptcy=True
+                # self.__bankRuptcy=True
+                pass
 
     # create a user account
     def createAcc(self,name,email,address,acType):
