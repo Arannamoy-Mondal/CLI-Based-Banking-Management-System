@@ -63,12 +63,17 @@ def adminFeatures(option):
 
 
 def userFeatures(accNo,option):
+    admin.firstBankRuptcy
     user=admin.returnUser(accNo)
-    if option==2:
+
+
+    if option==2:  # deposit
         amount=int(input("Enter deposit amount:"))
-        user.deposit(amount,admin)
+        user.deposit(amount,admin,"self")
         # admin.deposit(amount)
-    elif option==3:
+
+
+    elif option==3: # Withdrawal 
         if admin.checkBankRuptcy==True:
             print("This bank is bankrupt")
             return
@@ -81,11 +86,17 @@ def userFeatures(accNo,option):
             user.withdrawl(amount,admin)
             # admin.withdraw(amount)
             print(f"Withdrawal Successful.")
-    elif option==4:
+
+
+    elif option==4: # Available balance
         print(f"Available balance: {user.availableBalance}")
-    elif option==5:
+
+
+    elif option==5: # Transactions
         user.transactions
-    elif option==6:
+
+
+    elif option==6: # Take Loan
         if admin.checkBankRuptcy:
             print("This bank is bankrupt")
             return
@@ -99,7 +110,9 @@ def userFeatures(accNo,option):
                    print("Loan not possible.")
             else:
                 print("This bank is bankrupt.")
-    elif option==7:
+
+
+    elif option==7:  # Transfer money
         if admin.checkBankRuptcy==True:
             print("This bank is bankrupt")
             return
@@ -112,17 +125,18 @@ def userFeatures(accNo,option):
                 print("You have not enough balance.")
             else:
                 user.withdrawl(amount,admin)
-                user2.deposit(amount,admin)
+                user2.deposit(amount,admin,"self")
                 print("Transfer successful.")
         else:
             print("Account does not exist")
+
     
-    elif option==8:
+    elif option==8: # Total loan amount
         print(f"Total Loan {user.totalLoanAmount}")
         
 
 while True:
-    userType=input("U for User, A for Admin, E for exit:")
+    userType=input("U for User, A for Admin, D for Deposit, E for exit:")
     if userType.lower()=='a':
         while True:
             print("0 for exit.\n1 for creat an account.\n2 for delete user account.\n3 see all user accounts list.\n4 "+
@@ -165,12 +179,13 @@ while True:
                       print("Account identified")
                       name=input("Enter your name:")
                       email=input("Enter your email:")
-                      if admin.checkAcInfo(accNo,name):
+                      if admin.checkAcInfo(accNo,name,email):
                           while True:
                                print("2 for deposit money.\n3 for withdrawl amount\n4 for check available balance.\n5 transactions history.\n6 get loan from"+
-                             "the bank\n7 transfer money from your account to another account.\n8 for total loan amount.\n0 for exit.")
+                             "the bank\n7 transfer money from your account to another account.\n8 for total loan amount.\n0 for log out.")
                                userOption=input("Option:")
                                if userOption=="0":
+                                   print("Log Out Successful.")
                                    flag=True
                                    break
                                elif userOption=="8" or userOption=="2" or userOption=="3" or userOption=="4" or userOption=="5" or userOption=="6" or userOption=="7":
@@ -187,6 +202,18 @@ while True:
     elif userType.lower()=='e':
         print("Thanks for visiting")
         break
+
+    elif userType.lower()=="d":
+        accNo=int(input("Enter account no:"))
+        if admin.checkAcNo(accNo):
+            print("Account found")
+            name=input("Enter your name:")
+            contact=input("Enter your contact no:")
+            amount=int(input("Enter deposit amount:"))
+            user=admin.returnUser(accNo)
+            user.deposit(amount,admin,name+""+contact)
+        else:
+            print("Account not found")
     else:
         print("You have enter invalid option")
         

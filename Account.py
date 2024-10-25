@@ -11,7 +11,7 @@ class Account:
         self.__transactionsHistory=[]
         self.__loanTime=0
         self.__loanAmount=0
-        print(f"Congratulations! Account created successfully.\n Mr. {self.__name} account no is {self.__acNumber}. Please remember it or note down it.")
+        print(f"Congratulations! Account created successfully.\nMr. {self.__name} account no is {self.__acNumber}. Please remember it or note down it.")
     
     
     @property
@@ -35,7 +35,7 @@ class Account:
         return self.__acNumber
     
 
-    def deposit(self,balance,admin):
+    def deposit(self,balance,admin,ref):
         if self.__loanAmount>0:
             if self.__loanAmount>balance:
                 self.__loanAmount-=balance
@@ -50,12 +50,13 @@ class Account:
                 self.__loanAmount=0
                 self.__balance+=balance
                 admin.deposit(balance)
-                self.__transactionsHistory.append(f"Deposit <== {balance}")
-                print(f"Deposit {balance}")
+                self.__transactionsHistory.append(f"Deposit by {ref} <== {balance}")
+                print(f"Deposit {balance} successfully.")
         else:
          self.__balance+=balance
          admin.deposit(balance)
-         self.__transactionsHistory.append(f"Deposit <== {balance}")
+         self.__transactionsHistory.append(f"Deposit by {ref} <== {balance}")
+         print(f"Deposit {balance} successfully.")
 
 
     def withdrawl(self,balance,admin):
@@ -67,11 +68,11 @@ class Account:
             self.__transactionsHistory.append(f"Withdraw ==> {balance}")
 
     def takeLoan(self,amount):
-        if self.__loanTime<2 or self.__balance>amount:
+        if self.__loanTime<2 and self.__balance>amount:
             self.__loanTime+=1
             self.__loanAmount+=amount
         elif self.__balance<=amount:
-            print("Your loan amount and deposit balance is safe.")
+            print("Your loan amount and deposit balance is same.")
         else:
             print(f"You get already two loans")
     

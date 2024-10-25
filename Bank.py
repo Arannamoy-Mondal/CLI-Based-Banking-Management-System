@@ -5,6 +5,10 @@ class Bank:
         self.__totalBalance=0
         self.__totalLoanAmount=0
         self.__loanFeature=True
+        self.__bankRuptcy=False
+    
+    @property
+    def firstBankRuptcy(self):
         if self.__totalBalance<self.__totalLoanAmount:
                 self.__bankRuptcy=True
         else:
@@ -57,9 +61,9 @@ class Bank:
             return False
         
 
-    def checkAcInfo(self,acNo,name):
+    def checkAcInfo(self,acNo,name,email):
         if acNo in self.__AccountList:
-            if self.__AccountList[acNo].name==name:
+            if self.__AccountList[acNo].name==name and self.__AccountList[acNo].email==email:
                 print(f"Welcome, Mr. {name} !")
                 return True
             else:
