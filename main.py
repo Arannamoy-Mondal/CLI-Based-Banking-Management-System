@@ -2,7 +2,7 @@ from Bank import Bank
 from Account import Account
 admin=Bank()
 
-def adminFeatures(option):
+def adminFeatures(option): # admin features
     if option==1:
         name=input("Enter account owner name:")
         email=input("Enter account owner email:")
@@ -23,22 +23,22 @@ def adminFeatures(option):
             else:
                 return
             
-    elif option==2:
+    elif option==2: # delete account 
         admin.accList
         x=int(input("Enter account no:"))
         admin.deleteAc(x)
 
-    elif option==3:
+    elif option==3: # account list 
         admin.accList
 
     elif option==4:
         print(f"Total avialablebalance: {admin.availableBalance}")
 
-    elif option==5:
+    elif option==5: # total loan amount
         admin.totalLoanAmount
         # print(f"Total loan amount: {admin.totalLoanAmount}")
 
-    elif option==6:
+    elif option==6: # loan status on off
         admin.checkLoanStatus
         x=input("Loan feature (ON/OFF):")
         if x.lower()=="on":
@@ -49,8 +49,8 @@ def adminFeatures(option):
             admin.checkLoanStatus
         else:
             print("Invalid option for loan status")
-
-    elif option==7:
+ 
+    elif option==7: # for bankruptcy status on off
         admin.bankruptcyStatus
         x=input("Is the bank bankrupt(Yes/No)?")
         if x.lower()=="yes":
@@ -62,7 +62,7 @@ def adminFeatures(option):
         admin.bankruptcyStatus
 
 
-def userFeatures(accNo,option):
+def userFeatures(accNo,option): # user features
     admin.firstBankRuptcy
     user=admin.returnUser(accNo)
 

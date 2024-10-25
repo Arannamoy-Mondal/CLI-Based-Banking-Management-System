@@ -1,4 +1,3 @@
-# from Bank import Bank
 import random
 class Account:
     def __init__(self,name,email,address,acType):
@@ -35,7 +34,7 @@ class Account:
         return self.__acNumber
     
 
-    def deposit(self,balance,admin,ref):
+    def deposit(self,balance,admin,ref): # deposit
         if self.__loanAmount>0:
             if self.__loanAmount>balance:
                 self.__loanAmount-=balance
@@ -59,7 +58,8 @@ class Account:
          print(f"Deposit {balance} successfully.")
 
 
-    def withdrawl(self,balance,admin):
+
+    def withdrawl(self,balance,admin): # withdraw
         if self.__balance<balance or self.__balance<=self.totalLoanAmount:
             print(f"Withdrawal amount exceeded")
         else:
@@ -67,12 +67,14 @@ class Account:
             admin.withdrawal(balance)
             self.__transactionsHistory.append(f"Withdraw ==> {balance}")
 
-    def takeLoan(self,amount):
+
+
+    def takeLoan(self,amount): # take loan
         if self.__loanTime<2 and self.__balance>amount:
             self.__loanTime+=1
             self.__loanAmount+=amount
         elif self.__balance<=amount:
-            print("Your loan amount and deposit balance is same.")
+            print("Your are not eligible for loan.")
         else:
             print(f"You get already two loans")
     

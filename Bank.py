@@ -14,11 +14,12 @@ class Bank:
         else:
             self.__bankRuptcy=False
 
+    # create a user account
     def createAcc(self,name,email,address,acType):
         account=Account(name,email,address,acType)
         self.__AccountList[account.acNumber]=account
 
-
+    # delete user account
     def deleteAc(self,accNo):
         if accNo in self.__AccountList:
            del self.__AccountList[accNo]
@@ -26,41 +27,44 @@ class Bank:
         else:
             print(f"Account {accNo} not found.")
 
-
+    # update total bank balance
     def deposit(self,x):
         self.__totalBalance+=x
 
-
+    # update total bank balance
     def withdrawal(self,x):
         self.__totalBalance-=x
 
+    # checking loan status on off
     def isLoanPossible(self):
         return self.__loanFeature
     
-
+    # total loan amount
     def takeLoan(self,x):
         self.__totalLoanAmount+=x
 
+    # update total loan amount when any user deposit money
     def paidLoan(self,x):
         self.__totalLoanAmount-=x
 
+    # update loan status
     def loanStatus(self,x):
         self.__loanFeature=x  
 
-
+    # return user object
     def returnUser(self,accNo):
         if accNo in self.__AccountList:
             return self.__AccountList[accNo]
         
 
-
+    # check account no is exist or not
     def checkAcNo(self,x):
         if x in self.__AccountList:
             return True
         else :
             return False
         
-
+    # check account information for log in
     def checkAcInfo(self,acNo,name,email):
         if acNo in self.__AccountList:
             if self.__AccountList[acNo].name==name and self.__AccountList[acNo].email==email:
@@ -70,7 +74,7 @@ class Bank:
                 print("You have entered wrong credential.")
                 return False
             
-
+    # change bankruptcy status
     def changeBankRuptcy(self,x):
         self.__bankRuptcy=x
 
